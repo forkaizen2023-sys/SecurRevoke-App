@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SecurRevoke: Herramienta de automatización para la gestión inteligente de accesos y cumplimiento normativo en entornos sanitarios (HIPAA, HDS). Revoca accesos de forma segura y genera reportes en segundos.">
+    <meta name="keywords" content="cumplimiento normativo, HIPAA, HDS, revocación de accesos, ciberseguridad sanitaria, automatización IT">
+    <title>SecurRevoke | Automatización Inteligente de Cumplimiento de Accesos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Estilos Generales y Reseteo */
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Fondo neutro y profesional */
+            color: #212529;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(to right, #004a7c, #007bff); /* Gradiente azul para dinamismo */
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://via.placeholder.com/1920x400?text=Seguridad+Inteligente') no-repeat center/cover; /* Placeholder para imagen hero */
+            opacity: 0.3;
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            animation: fadeInDown 1s ease-out;
+        }
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Sección de Problema/Solución */
+        .problem-solution {
+            padding: 80px 0;
+            background-color: #ffffff;
+            text-align: center;
+        }
+        .problem-solution h2 {
+            font-size: 2.5em;
+            color: #004a7c;
+            margin-bottom: 40px;
+        }
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        .card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            flex: 1 1 300px;
+            max-width: 300px;
+            text-align: left;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid #007bff;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        .card i {
+            font-size: 2em;
+            color: #d9534f; /* Rojo para problemas */
+            margin-bottom: 15px;
+        }
+        .solution i {
+            color: #28a745; /* Verde para soluciones */
+        }
+        .card h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        /* Sección de Propuesta de Valor */
+        .value-proposition {
+            padding: 80px 0;
+            background-color: #e9ecef;
+            text-align: center;
+        }
+        .value-proposition h2 {
+            font-size: 2.5em;
+            color: #004a7c;
+            margin-bottom: 20px;
+        }
+        .focus {
+            font-size: 1.8em;
+            color: #007bff;
+            font-weight: 500;
+            margin: 0 auto 40px;
+            max-width: 800px;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .feature-item {
+            padding: 30px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .feature-item:hover {
+            transform: scale(1.05);
+        }
+        .feature-item i {
+            font-size: 2.5em;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+        .feature-item h3 {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+        /* Testimonios */
+        .testimonials {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+        .testimonials h2 {
+            font-size: 2.5em;
+            color: #004a7c;
+            margin-bottom: 40px;
+        }
+        .testimonial-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        .testimonial-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            flex: 1 1 300px;
+            max-width: 300px;
+            text-align: left;
+        }
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        .testimonial-card .author {
+            font-weight: bold;
+            color: #007bff;
+        }
+        /* CTA */
+        .cta-section {
+            padding: 60px 0;
+            background: linear-gradient(to right, #007bff, #004a7c);
+            color: white;
+            text-align: center;
+        }
+        .cta-section h2 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: #ffffff;
+            color: #007bff;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            font-weight: 500;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .cta-button:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+        /* Footer */
+        footer {
+            padding: 30px 0;
+            background-color: #212529;
+            color: #adb5bd;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        footer a {
+            color: #adb5bd;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        footer a:hover {
+            color: #ffffff;
+        }
+        /* Responsividad */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 20px;
+            }
+            .hero h1 {
+                font-size: 2.2em;
+            }
+            .hero p {
+                font-size: 1.1em;
+            }
+            .cards, .features, .testimonial-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>SecurRevoke: Gestión Inteligente de Accesos 🛡️</h1>
+            <p>Automatiza el cumplimiento normativo en entornos sanitarios (HIPAA, HDS) con revocación segura y reportes instantáneos. Reduce riesgos y ahorra tiempo.</p>
+            <a href="[ENLACE_A_TU_APLICACION_STREAMLIT]" class="cta-button">Prueba Gratuita Ahora</a>
+        </div>
+    </section>
+
+    <section class="problem-solution">
+        <div class="container">
+            <h2>El Desafío en la Gestión de Accesos</h2>
+            <div class="cards">
+                <div class="card">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Riesgos en Procesos Manuales</h3>
+                    <p>La revocación manual de accesos por cambios en roles o personal introduce errores humanos, creando brechas de seguridad críticas en entornos regulados.</p>
+                </div>
+                <div class="card solution">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Cumplimiento Normativo Exigente</h3>
+                    <p>Normativas como HIPAA requieren trazabilidad inmediata. Las auditorías manuales consumen recursos valiosos y aumentan el riesgo de incumplimientos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="value-proposition">
+        <div class="container">
+            <h2>Nuestra Ventaja: Automatización Avanzada</h2>
+            <p class="focus">Convierte horas de trabajo manual en auditorías seguras y conformes en segundos, con trazabilidad total.</p>
+            
+            <div class="features">
+                <div class="feature-item">
+                    <i class="fas fa-file-pdf"></i>
+                    <h3>Reportes Oficiales Automatizados</h3>
+                    <p>Genera PDFs de auditoría detallados para cada cambio, listos para reguladores y con sellos de tiempo para máxima trazabilidad.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Revocación Precisa y Segura</h3>
+                    <p>Algoritmos validados eliminan solo las IPs especificadas, con verificación automática de formatos y backups integrados.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-globe"></i>
+                    <h3>Versatilidad y Escalabilidad</h3>
+                    <p>Soporte multiformato (CSV, TXT), interfaz multilingüe y integración con sistemas empresariales para operaciones globales.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2>Lo que Dicen Nuestros Usuarios</h2>
+            <div class="testimonial-cards">
+                <div class="testimonial-card">
+                    <p>"SecurRevoke ha transformado nuestra gestión de accesos, reduciendo el tiempo de auditoría en un 80% y asegurando cumplimiento total."</p>
+                    <span class="author">- Dr. Elena Ruiz, Directora de IT en Hospital Central</span>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Una herramienta imprescindible para ciberseguridad en salud. Fácil de usar y extremadamente confiable."</p>
+                    <span class="author">- Marco López, Especialista en Compliance</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>¿Listo para Elevar tu Seguridad?</h2>
+            <p>Únete a cientos de profesionales que ya automatizan su cumplimiento con SecurRevoke.</p>
+            <a href="[ENLACE_A_TU_APLICACION_STREAMLIT]" class="cta-button">Iniciar Prueba Gratuita</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 SecurRevoke. Todos los derechos reservados.</p>
+            <div>
+                <a href="#">Política de Privacidad</a> |
+                <a href="#">Términos de Servicio</a> |
+                <a href="#">Contacto</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
