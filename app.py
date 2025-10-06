@@ -76,7 +76,7 @@ TEXTS = {
     "es": {
         "lang_name": "Español",
         "title": "Herramienta Profesional de Gestión de Listas de Acceso (IPs)",
-        "intro": "Esta herramienta garantiza la integridad de sus listas de acceso eliminando IPs obsoletas. Es crucial en entornos sanitarios para mantener la seguridad de los registros de pacientes.",
+        "intro": "Esta herramienta garantiza la integridad de sus listas de acceso eliminando IPs obsoletas. Es crucial en entornos de analisis de seguridad.",
         "sidebar_title": "⚙️ Configuración",
         "lang_label": "Seleccionar Idioma",
         "quick_guide": "Guía de Uso Rápida",

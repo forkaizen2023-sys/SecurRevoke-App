@@ -1,0 +1,12 @@
+# Dependencias de Python
+__pycache__/
+.venv/
+*.pyc
+
+# Archivos de Streamlit/Cache
+.streamlit/
+
+# Archivos Locales y de Auditoría (¡CRÍTICO!)
+audit_log.db          # Evita que se suba el historial de auditoría local
+data/                 # Si manejas archivos de prueba
+.DS_Store             # Archivos de Mac OS
