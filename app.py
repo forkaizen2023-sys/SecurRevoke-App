@@ -1,6 +1,6 @@
 # app.py - Streamlit web app para la gestión profesional de listas de acceso
 # Versión FINAL con Reporte PDF de Auditoría y Trazabilidad SQLite
-# CORRECCIÓN: st.experimental_rerun() reemplazado por st.rerun()
+# Incluye la función de purga para control de privacidad
 
 import streamlit as st
 import ipaddress
@@ -41,6 +41,19 @@ def init_db():
 # Inicializar la base de datos al inicio de la aplicación
 init_db()
 
+def purge_audit_log():
+    """Elimina todos los registros de la tabla audit_events."""
+    try:
+        conn = sqlite3.connect(DATABASE_NAME)
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM audit_events")
+        conn.commit()
+        conn.close()
+        return True
+    except Exception as e:
+        print(f"Error al purgar la base de datos: {e}")
+        return False
+    
 def log_audit_event(user_id, target_file, ips_revoked):
     """Registra una acción de revocación en la base de datos."""
     timestamp = datetime.datetime.now().isoformat()
@@ -140,6 +153,19 @@ with st.sidebar:
         index=0 
     )
     delimiter_value = delimiter_map[delimiter_name]
+
+    # 🚨 INTEGRACIÓN DEL CONTROL DE PRIVACIDAD
+    st.markdown("---") 
+    st.subheader("🗑️ Control de Privacidad")
+    st.warning("Esto borrará permanentemente todos los logs de auditoría guardados localmente.")
+    
+    if st.button("BORRAR HISTORIAL DE AUDITORÍA PERMANENTEMENTE", help="Borra todos los registros guardados en la base de datos local."):
+        if purge_audit_log():
+            st.toast("✅ Historial de auditoría borrado con éxito.", icon='🗑️')
+            st.rerun() 
+        else:
+            st.error("❌ No se pudo borrar el historial.")
+# --- FIN BARRA LATERAL ---
 
 # 3. FUNCIONES DE LÓGICA Y REPORTE
 def is_valid_ip(ip_string):
